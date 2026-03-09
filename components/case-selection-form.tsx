@@ -70,12 +70,32 @@ export function CaseSelectionForm({
   };
 
   return (
-    <div className="rounded-3xl border border-border bg-surface p-6 shadow-sm">
-      <p className="text-sm text-slate-500">Selected Model</p>
-      <p className="mb-6 text-lg font-semibold text-slate-900">{model}</p>
+    <div className="rounded-[32px] border border-border bg-surface-strong p-6 shadow-[0_24px_50px_rgba(75,85,68,0.08)] sm:p-8">
+      <div className="mb-8 grid gap-5 rounded-[28px] bg-[#ece2d3] p-5 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase">
+            Step 2
+          </p>
+          <h2 className="mt-3 font-serif text-3xl font-semibold text-slate-900">
+            Select your case finish
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-slate-600">
+            Your selected shell is ready. Choose the finish that best suits the style of your custom artwork.
+          </p>
+        </div>
+        <div className="rounded-[24px] border border-white/70 bg-white/75 p-5">
+          <p className="text-sm text-slate-500">Selected Model</p>
+          <p className="mt-2 text-lg font-semibold text-slate-900">{model}</p>
+        </div>
+      </div>
 
-      <h2 className="text-xl font-semibold text-slate-900">Choose Case Type</h2>
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
+      <div className="flex items-center justify-between gap-4">
+        <h2 className="text-xl font-semibold text-slate-900">Choose Case Type</h2>
+        <span className="rounded-full border border-border bg-[#f7f1e7] px-4 py-2 text-xs font-semibold tracking-[0.18em] text-slate-500 uppercase">
+          Personalized collection
+        </span>
+      </div>
+      <div className="mt-4 grid gap-4 sm:grid-cols-3">
         {Object.values(caseTypeOptions).map((option) => {
           const selected = caseType === option.key;
           return (
@@ -83,12 +103,20 @@ export function CaseSelectionForm({
               key={option.key}
               type="button"
               onClick={() => onCaseTypeSelect(option.key)}
-              className={`rounded-2xl border p-4 text-left transition ${
+              className={`rounded-[28px] border p-5 text-left transition ${
                 selected
                   ? "border-brand bg-brand-soft"
-                  : "border-border hover:border-brand/60"
+                  : "border-border bg-white hover:border-brand/60"
               }`}
             >
+              <div className="mb-4 flex items-center justify-between">
+                <span className="rounded-full bg-[#f3ebde] px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
+                  {option.key}
+                </span>
+                <span className="text-sm font-semibold text-slate-500">
+                  From $45
+                </span>
+              </div>
               <p className="text-base font-semibold text-slate-900">
                 {option.label}
               </p>
@@ -132,13 +160,13 @@ export function CaseSelectionForm({
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">
         <p className="text-sm text-slate-500">
-          Continue once your case configuration is selected.
+          Continue once your finish and optional color are selected.
         </p>
         <button
           type="button"
           onClick={goToSummary}
           disabled={!canContinue}
-          className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition enabled:hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+          className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition enabled:hover:bg-[#2b413b] disabled:cursor-not-allowed disabled:bg-slate-300"
         >
           Continue to Summary
         </button>

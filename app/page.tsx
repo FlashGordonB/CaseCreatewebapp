@@ -1,64 +1,170 @@
 import Link from "next/link";
 import { FeatureHighlights } from "@/components/feature-highlights";
+import { StorefrontShell } from "@/components/storefront-shell";
+import {
+  collectionFilters,
+  collectionSteps,
+  showcaseCards,
+} from "@/lib/storefront-content";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#dcfce7_0,_#f4f6fb_42%,_#f4f6fb_100%)]">
-      <div className="mx-auto flex w-full max-w-6xl flex-col px-6 pb-20 pt-10 sm:px-10">
-        <header className="mb-16 flex items-center justify-between">
-          <span className="text-sm font-semibold tracking-[0.18em] text-brand uppercase">
-            ResinCase Studio
-          </span>
-          <Link
-            href="/select-model"
-            className="rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand hover:text-brand"
-          >
-            Start Build
-          </Link>
-        </header>
-
-        <section className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
-          <div>
-            <p className="mb-3 inline-flex rounded-full border border-brand/30 bg-brand-soft px-4 py-1 text-xs font-semibold tracking-[0.12em] text-brand uppercase">
-              Custom Resin Printed Cases & Film
+    <StorefrontShell>
+      <main>
+        <section className="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-8 pt-10 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:pt-12">
+          <div className="rounded-[36px] border border-border bg-surface-strong p-7 shadow-[0_28px_70px_rgba(75,85,68,0.08)] sm:p-10">
+            <p className="inline-flex rounded-full border border-brand/20 bg-brand-soft px-4 py-1.5 text-[11px] font-semibold tracking-[0.2em] text-brand uppercase">
+              Personalizable Cases
             </p>
-            <h1 className="text-4xl leading-tight font-bold text-slate-900 sm:text-6xl">
-              Turn Your Favorite Image Into a Premium Phone Case.
+            <h1 className="mt-6 max-w-3xl font-serif text-5xl leading-tight font-semibold text-slate-900 sm:text-6xl">
+              Create a custom case with the feel of a curated collection.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
-              We print ultra-detailed HD artwork directly onto protective cases
-              and film using a resin process built for vivid color and clean
-              depth.
+            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+              Browse finishes, choose your phone, and move through customization with a softer editorial storefront inspired by modern accessory brands.
             </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="/select-model"
-                className="rounded-full bg-brand px-8 py-3 text-base font-semibold text-white transition hover:bg-teal-700"
+                className="rounded-full bg-brand px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#2b413b] sm:text-base"
               >
-                Discover Now
+                Shop Personalized Cases
               </Link>
               <span className="text-sm text-slate-500">
-                Local demo flow, ready for ecommerce expansion
+                Cream surfaces, sage accents, and collection-first merchandising
               </span>
             </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-surface p-6 shadow-sm">
-            <div className="rounded-2xl border border-dashed border-brand/40 bg-gradient-to-b from-teal-100 to-white p-8">
-              <h2 className="text-lg font-semibold text-slate-900">
-                HD Resin Print Preview
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                Placeholder mock area for future live case mockups and image
-                upload previews.
+          <div className="grid gap-5">
+            <div className="rounded-[36px] border border-border bg-[#e7ddd0] p-7">
+              <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase">
+                How it works
               </p>
-              <div className="mt-6 h-44 rounded-xl border border-border bg-white/80" />
+              <div className="mt-6 grid gap-4">
+                {collectionSteps.map((step) => (
+                  <div
+                    key={step.id}
+                    className="rounded-[24px] border border-white/70 bg-white/70 p-4"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="font-serif text-2xl text-brand">{step.id}</span>
+                      <p className="text-base font-semibold text-slate-900">
+                        {step.title}
+                      </p>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      {step.copy}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        <FeatureHighlights />
-      </div>
-    </main>
+        <section className="mx-auto w-full max-w-7xl px-5 pt-4 sm:px-8 lg:px-10">
+          <div className="flex flex-wrap items-center gap-3">
+            {collectionFilters.map((filter, index) => (
+              <span
+                key={filter}
+                className={`rounded-full border px-4 py-2 text-sm transition ${
+                  index === 0
+                    ? "border-brand bg-brand text-white"
+                    : "border-border bg-white/70 text-slate-600"
+                }`}
+              >
+                {filter}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-7xl px-5 pb-4 pt-8 sm:px-8 lg:px-10">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase">
+                Featured collection
+              </p>
+              <h2 className="mt-3 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+                Best-loved customization styles
+              </h2>
+            </div>
+            <Link href="/select-model" className="hidden text-sm font-semibold text-brand sm:block">
+              View all
+            </Link>
+          </div>
+
+          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {showcaseCards.map((card, index) => (
+              <article
+                key={card.title}
+                className="rounded-[30px] border border-border bg-surface-strong p-5 shadow-[0_18px_40px_rgba(75,85,68,0.08)]"
+              >
+                <div
+                  className={`flex h-60 items-end rounded-[24px] p-5 ${
+                    index % 4 === 0
+                      ? "bg-[#ddd6c7]"
+                      : index % 4 === 1
+                        ? "bg-[#d8e5dc]"
+                        : index % 4 === 2
+                          ? "bg-[#d9e5ea]"
+                          : "bg-[#efe5d8]"
+                  }`}
+                >
+                  <div className="w-full rounded-[22px] border border-white/60 bg-white/70 p-4 backdrop-blur">
+                    <p className="text-xs font-semibold tracking-[0.18em] text-slate-500 uppercase">
+                      {card.tone}
+                    </p>
+                    <p className="mt-2 text-sm text-slate-600">Custom print preview</p>
+                  </div>
+                </div>
+                <div className="mt-5 flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-900">{card.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">{card.copy}</p>
+                  </div>
+                  <p className="text-sm font-semibold text-slate-900">{card.price}</p>
+                </div>
+                <Link
+                  href="/select-model"
+                  className="mt-5 inline-flex rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand hover:text-brand"
+                >
+                  Customize
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-7xl px-5 pt-6 sm:px-8 lg:px-10">
+          <div className="rounded-[36px] border border-border bg-[#efe5d6] p-7 sm:p-10">
+            <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+              <div>
+                <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase">
+                  Design direction
+                </p>
+                <h2 className="mt-3 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+                  Built to feel like a Pelacase-inspired collection page
+                </h2>
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+                  The landing page now prioritizes collection browsing, soft merchandising cards, and a clearer visual path into the custom flow instead of a generic product configurator.
+                </p>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {collectionSteps.slice(0, 2).map((step) => (
+                  <div key={step.id} className="rounded-[24px] border border-white/70 bg-white/75 p-5">
+                    <p className="font-serif text-2xl text-brand">{step.id}</p>
+                    <p className="mt-3 text-base font-semibold text-slate-900">{step.title}</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">{step.copy}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <FeatureHighlights />
+        </section>
+      </main>
+    </StorefrontShell>
   );
 }

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { CaseSelectionForm } from "@/components/case-selection-form";
-import { isCaseTypeKey, isValidPhoneModel, getSingleParam } from "@/lib/selection";
+import { StorefrontShell } from "@/components/storefront-shell";
+import { getSingleParam, isCaseTypeKey, isValidPhoneModel } from "@/lib/selection";
 
 type SelectCasePageProps = {
   searchParams: Promise<{
@@ -24,28 +25,38 @@ export default async function SelectCasePage({ searchParams }: SelectCasePagePro
   const initialCaseType = isCaseTypeKey(caseTypeParam) ? caseTypeParam : undefined;
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="mx-auto w-full max-w-5xl px-6 py-12 sm:px-10">
-        <nav className="mb-8 text-sm text-slate-500">
+    <StorefrontShell>
+      <main className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 lg:px-10">
+        <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-slate-500">
           <Link href="/" className="hover:text-brand">
             Home
           </Link>
-          <span className="px-2">/</span>
+          <span>/</span>
           <Link href="/select-model" className="hover:text-brand">
             Select Model
           </Link>
-          <span className="px-2">/</span>
-          <span>Select Case</span>
+          <span>/</span>
+          <span className="rounded-full border border-border bg-white/60 px-3 py-1">
+            Select Case
+          </span>
         </nav>
 
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-            Select Case Style
-          </h1>
-          <p className="mt-3 text-slate-600">
-            Choose a case type and color when available, then continue to review
-            your custom configuration.
-          </p>
+        <header className="mb-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase">
+              Personalized collection
+            </p>
+            <h1 className="mt-3 font-serif text-4xl font-semibold text-slate-900 sm:text-5xl">
+              Select case style
+            </h1>
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+              Now choose the finish that frames your custom art. Colors appear only when the selected case style supports them.
+            </p>
+          </div>
+          <div className="rounded-[28px] border border-border bg-[#f0e7d8] p-5">
+            <p className="text-sm font-semibold text-slate-900">Current device</p>
+            <p className="mt-2 text-lg font-semibold text-brand">{modelParam}</p>
+          </div>
         </header>
 
         <CaseSelectionForm
@@ -53,7 +64,7 @@ export default async function SelectCasePage({ searchParams }: SelectCasePagePro
           initialCaseType={initialCaseType}
           initialColor={colorParam}
         />
-      </div>
-    </main>
+      </main>
+    </StorefrontShell>
   );
 }

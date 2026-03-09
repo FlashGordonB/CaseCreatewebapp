@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { StorefrontShell } from "@/components/storefront-shell";
 import { caseTypeOptions } from "@/lib/product-options";
 import {
   getSingleParam,
@@ -40,64 +41,85 @@ export default async function SummaryPage({ searchParams }: SummaryPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="mx-auto w-full max-w-4xl px-6 py-12 sm:px-10">
-        <nav className="mb-8 text-sm text-slate-500">
+    <StorefrontShell>
+      <main className="mx-auto w-full max-w-5xl px-5 py-10 sm:px-8 lg:px-10">
+        <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-slate-500">
           <Link href="/" className="hover:text-brand">
             Home
           </Link>
-          <span className="px-2">/</span>
+          <span>/</span>
           <Link href="/select-model" className="hover:text-brand">
             Select Model
           </Link>
-          <span className="px-2">/</span>
-          <span>Summary</span>
+          <span>/</span>
+          <span className="rounded-full border border-border bg-white/60 px-3 py-1">
+            Summary
+          </span>
         </nav>
 
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-            Configuration Summary
-          </h1>
-          <p className="mt-3 text-slate-600">
-            Review your selected product setup before continuing to artwork and
-            design upload.
-          </p>
+        <header className="mb-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase">
+              Step 3
+            </p>
+            <h1 className="mt-3 font-serif text-4xl font-semibold text-slate-900 sm:text-5xl">
+              Configuration summary
+            </h1>
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+              Review the shell and finish before continuing into artwork upload and final layout.
+            </p>
+          </div>
+          <div className="rounded-[28px] border border-border bg-[#f0e7d8] p-5">
+            <p className="text-sm font-semibold text-slate-900">Ready for next step</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              The next stage can introduce image upload, crop tools, and live mockups while keeping this same storefront language.
+            </p>
+          </div>
         </header>
 
-        <section className="rounded-3xl border border-border bg-surface p-6 shadow-sm sm:p-8">
+        <section className="rounded-[32px] border border-border bg-surface-strong p-6 shadow-[0_24px_50px_rgba(75,85,68,0.08)] sm:p-8">
           <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-slate-900">
-                Your Custom Configuration
+                Your custom configuration
               </h2>
-              <div className="rounded-2xl border border-border bg-slate-50 p-4">
+              <div className="rounded-[24px] border border-border bg-[#f7f1e7] p-5">
                 <p className="text-sm text-slate-500">Phone Model</p>
-                <p className="text-base font-semibold text-slate-900">{model}</p>
+                <p className="mt-2 text-base font-semibold text-slate-900">{model}</p>
               </div>
-              <div className="rounded-2xl border border-border bg-slate-50 p-4">
+              <div className="rounded-[24px] border border-border bg-[#f7f1e7] p-5">
                 <p className="text-sm text-slate-500">Case Type</p>
-                <p className="text-base font-semibold text-slate-900">
+                <p className="mt-2 text-base font-semibold text-slate-900">
                   {selectedCase.label}
                 </p>
               </div>
               {requiresColor && (
-                <div className="rounded-2xl border border-border bg-slate-50 p-4">
+                <div className="rounded-[24px] border border-border bg-[#f7f1e7] p-5">
                   <p className="text-sm text-slate-500">Color</p>
-                  <p className="text-base font-semibold capitalize text-slate-900">
+                  <p className="mt-2 text-base font-semibold capitalize text-slate-900">
                     {colorRaw}
                   </p>
                 </div>
               )}
             </div>
 
-            <div className="rounded-2xl border border-dashed border-brand/40 bg-gradient-to-b from-teal-100 to-white p-5">
+            <div className="rounded-[28px] border border-border bg-[#e8ddd0] p-5">
               <h3 className="text-base font-semibold text-slate-900">
-                Product Preview (Mock)
+                Product Preview
               </h3>
-              <div className="mt-3 h-44 rounded-xl border border-border bg-white/85" />
+              <div className="mt-4 flex h-56 items-end rounded-[24px] bg-white/70 p-5">
+                <div className="w-full rounded-[22px] border border-white/70 bg-brand-soft p-5">
+                  <p className="text-xs font-semibold tracking-[0.18em] text-brand uppercase">
+                    Mock preview
+                  </p>
+                  <p className="mt-2 text-sm text-slate-700">
+                    {selectedCase.label}
+                    {colorRaw ? ` / ${colorRaw}` : ""} for {model}
+                  </p>
+                </div>
+              </div>
               <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                Image upload and live print layout tools are the next step and
-                will be added in future iterations.
+                Image upload and live print layout tools are the next step. This page now presents them inside a more merchandise-driven summary card.
               </p>
             </div>
           </div>
@@ -105,19 +127,19 @@ export default async function SummaryPage({ searchParams }: SummaryPageProps) {
           <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">
             <Link
               href={`/select-case?model=${encodeURIComponent(model)}`}
-              className="rounded-full border border-border px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-brand hover:text-brand"
+              className="rounded-full border border-border bg-white px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-brand hover:text-brand"
             >
               Edit Selection
             </Link>
             <button
               type="button"
-              className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-teal-700"
+              className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#2b413b]"
             >
               Continue to Design Upload
             </button>
           </div>
         </section>
-      </div>
-    </main>
+      </main>
+    </StorefrontShell>
   );
 }
